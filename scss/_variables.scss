@@ -1,0 +1,63 @@
+// BASE
+// ------------------------------
+// Document base font size in px
+$font-size-base: 16px;
+$font-default: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+// Helper to convert PX to REM
+@function rem($pixels) {
+    @return $pixels / $font-size-base * 1rem;
+}
+
+// General unit accross the website
+$unit: rem(8px);
+
+// Base line-height
+$line-height-base: $unit*3; // 24px
+
+
+
+// FONTS
+// ------------------------------
+// fonts path, relative to the compiled css file
+$fonts-path: '../fonts/' !default;
+
+// fonts list
+// NOTE order: font-family, filename (without extension), font-weight, font-style
+/* EXAMPLE:
+$fonts: (
+	("customfont", "customfont-regular", normal, normal, ('eot', 'otf', 'woff', 'woff2', 'ttf', 'svg')),
+	("customfont", "customfont-bold", bold, normal, ('eot', 'otf', 'woff', 'woff2', 'ttf', 'svg')),
+	("customfont", "customfont-italic", normal, italic, ('eot', 'otf', 'woff', 'woff2', 'ttf', 'svg')),
+	("customfont", "customfont-bolditalic", bold, italic, ('eot', 'otf', 'woff', 'woff2', 'ttf', 'svg')),
+) !default;
+*/
+$fonts: () !default;
+
+
+
+// COLORS
+// ------------------------------
+$primary: #5764c6;
+$secondary: #eff1fa;
+
+$black: #000;
+$darkest: #454d5d;
+$darker: #727e96;
+$dark: #acb3c2;
+$light: #e7e9ed;
+$lighter: #f0f1f4;
+$lightest: #f8f9fa;
+$white: #FFF;
+
+
+
+// BREAKPOINTS
+// ------------------------------
+$breakpoints: (
+    xs: 0,
+    sm: 420px,
+    md: 640px,
+    lg: 960px,
+    xl: 1400px,
+);

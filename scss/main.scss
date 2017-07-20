@@ -1,0 +1,32 @@
+/**
+ * Load components
+ * ------------------------------
+ * Don't write CSS in there
+ */
+
+
+// Import project commons
+// --------------------
+@import "variables";
+@import "core/reset";
+@import "core/breakpoints";
+@import "core/grid";
+@import "core/fonts";
+@import "helpers";
+@import "global";
+// @import "icons"; (example)
+// …
+
+
+// Import project components
+// NOTE create one file per component, put other things into “misc”
+// --------------------
+@import "partials/layout";
+@import "partials/misc";
+// øimport "partials/article; (example)
+
+
+// Import temporary styles
+// NOTE Keep it as clean as possible (empty is best)
+// --------------------
+@import "dev";

@@ -1,0 +1,31 @@
+/**
+ * Fonts & icons
+ * ------------------------------
+ * Dependencies:
+ * - $fonts-path
+ * - $fonts
+ */
+
+
+// DECLARATIONS
+// ------------------------------
+@each $font in $fonts {
+    $file: '#{$fonts-path}#{nth($font, 2)}';
+    $src: ();
+    @each $format in nth($font, 5) {
+        @if $format == 'eot' { $src: append($src, url('#{$file}.eot?#iefix') format('embedded-opentype'), comma) } // IE 6-8
+        @elseif $format == 'otf' { $src: append($src, url('#{$file}.otf') format('opentype'), comma) }
+        @elseif $format == 'woff' { $src: append($src, url('#{$file}.woff') format('woff'), comma) }
+        @elseif $format == 'woff2' { $src: append($src, url('#{$file}.woff2') format('woff2'), comma) }
+        @elseif $format == 'ttf' { $src: append($src, url('#{$file}.ttf') format('truetype'), comma) }
+        @elseif $format == 'svg' { $src: append($src, url('#{$file}.svg##{nth($font, 2)}') format('svg'), comma) }
+    }
+
+    @font-face {
+        font-family: nth($font, 1);
+        @if index(nth($font, 5), 'eot') { src: url('#{$file}.eot'); } // IE9
+        src: $src;
+        font-weight: nth($font, 3);
+        font-style: nth($font, 4);
+    }
+}

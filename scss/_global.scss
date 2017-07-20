@@ -1,0 +1,17 @@
+// General
+// NOTE styles on tag selectors
+// ---------------------
+body {
+  @extend %antialiased;
+  font-family: $font-default;
+}
+
+
+// Overrides
+// ---------------------
+
+
+
+// Utilities
+// NOTE use `u-` prefix for public classes
+// ---------------------
