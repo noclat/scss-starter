@@ -2,7 +2,7 @@
  * Grid
  * ------------------------------
  * Dependencies:
- * - Breakpoints
+ * - _breakpoints.scss
  * - $breakpoints
  * - $unit
  *
@@ -21,6 +21,7 @@
         &:last-child { // modifiers
             @include column((sm: 2, md: 1, lg: 2));
             @include offset((md: 1, xl: 0));
+            @include order((sm:1, md:0));
         }
     }
 }
@@ -72,7 +73,7 @@ $grid-gutter: $unit !default;
 // Size of a column
 @mixin column($sizes, $columns: null, $default: 1) {
     @if type-of($columns) == map { $grid-columns: $columns !global; }
-    $sizes: gb-sizes($sizes, $grid-columns, $default);
+    $sizes: grid-sizes($sizes, $grid-columns, $default);
     @each $key, $value in $sizes {
         @include breakpoint-up($key) {
             $w: calc(#{$value} - #{$grid-gutter});
@@ -86,7 +87,7 @@ $grid-gutter: $unit !default;
 // Offset column
 @mixin offset($sizes, $columns: null, $default: 0) {
     @if type-of($columns) == map { $grid-columns: $columns !global; }
-    $sizes: gb-sizes($sizes, $grid-columns, $default);
+    $sizes: grid-sizes($sizes, $grid-columns, $default);
     @each $key, $value in $sizes {
         $w: calc(#{$value} + #{$grid-gutter/2});
         @include breakpoint-up($key) {
@@ -97,18 +98,29 @@ $grid-gutter: $unit !default;
 }
 
 
+// Set order
+@mixin order($orders, $default: 0) {
+    $orders: grid-compute-breakpoints($orders, $default);
+    @each $key, $value in $orders {
+        @include breakpoint-up($key) {
+            order: $value;
+        }
+    }
+}
+
+
 
 // SIZE HELPERS
 // ------------------------------
 // Get map of column sizes in percentage by breakpoint
 // NOTE: ex: for 4 columns, (md: 2) becomes (xs: 25%, sm: 25%, md: 50%, lg: 50%, xl: 50%)
-@function gb-sizes($sizes, $columns, $default) {
+@function grid-sizes($sizes, $columns, $default) {
     // compute the number of columns and the current column sizes for each breakpoint
-    $_columns: gb-compute-breakpoints($columns);
-    $_sizes: gb-compute-breakpoints($sizes, $default);
+    $_columns: grid-compute-breakpoints($columns);
+    $_sizes: grid-compute-breakpoints($sizes, $default);
 
     $output: ();
-    @each $key in map-keys($breakpoints) {
+    @each $key in $_breakpoints-keys {
         // add breakpoint if the columns number or the current column size changes
         @if map-has-key($columns, $key) or map-has-key($sizes, $key) {
             // get the number of columns and the current column size
@@ -124,7 +136,7 @@ $grid-gutter: $unit !default;
 
 // Make values persist through following breakpoints
 // NOTE: ex: (md: 1) becomes (xs: 0, sm: 0, md: 1, lg: 1, xl: 1)
-@function gb-compute-breakpoints($map, $default: 1) {
+@function grid-compute-breakpoints($map, $default: 1) {
     $output: $breakpoints;
     $value: $default;
     @each $key, $val in $output {
@@ -142,7 +154,7 @@ $grid-gutter: $unit !default;
 // NOTE: should be extended next to the row() include
 // NOTE: ex: `@extend %between-xs, %middle-md, %equal-lg;`
 // ------------------------------
-@each $key in map-keys($breakpoints) {
+@each $key in $_breakpoints-keys {
     // Vertical: alignement of direct children
     $map: (bottom: flex-end, top: flex-start, middle: center, equal: stretch);
     @each $name, $property in $map {
