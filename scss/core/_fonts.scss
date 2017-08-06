@@ -3,7 +3,18 @@
  * ------------------------------
  * Dependencies:
  * - $fonts-path
- * - $fonts
+ * - $fonts (list)
+ *
+ * How to use:
+
+// NOTE: order: font-family, filename (without extension), font-weight, font-style, formats
+$fonts: (
+    ("customfont", "customfont-regular", normal, normal, ('eot', 'otf', 'woff', 'woff2', 'ttf', 'svg')),
+    ("customfont", "customfont-bold", bold, normal, ('eot', 'otf', 'woff', 'woff2', 'ttf', 'svg')),
+    ("customfont", "customfont-italic", normal, italic, ('eot', 'otf', 'woff', 'woff2', 'ttf', 'svg')),
+    ("customfont", "customfont-bolditalic", bold, italic, ('eot', 'otf', 'woff', 'woff2', 'ttf', 'svg')),
+) !default;
+
  */
 
 

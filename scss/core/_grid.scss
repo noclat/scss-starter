@@ -31,7 +31,7 @@
 // GLOBAL MIXINS
 // ------------------------------
 // Global variables
-// NOTE not meant to be set manually
+// NOTE: not meant to be set manually
 // but it could happen, in case of nested grids
 // if you need to reset the columns number after declaring a child grid
 $grid-columns: (xs: 12) !default;
@@ -51,17 +51,13 @@ $grid-gutter: $unit !default;
 @mixin row($columns: null) {
     @if type-of($columns) == map { $grid-columns: $columns !global; }
 
-    display: -webkit-flex;
     display: flex;
-
-    -webkit-flex-wrap: wrap;
     flex-wrap: wrap;
 
     margin-left: -$grid-gutter/2;
     margin-right: -$grid-gutter/2;
 
     & > * {
-        -webkit-flex: 0 0 auto;
         flex: 0 0 auto;
 
         margin-left: $grid-gutter/2;
@@ -80,7 +76,6 @@ $grid-gutter: $unit !default;
     @each $key, $value in $sizes {
         @include breakpoint-up($key) {
             $w: calc(#{$value} - #{$grid-gutter});
-            -webkit-flex-basis: $w;
             flex-basis: $w;
             max-width: $w;
         }
@@ -106,7 +101,7 @@ $grid-gutter: $unit !default;
 // SIZE HELPERS
 // ------------------------------
 // Get map of column sizes in percentage by breakpoint
-// NOTE ex: for 4 columns, (md: 2) becomes (xs: 25%, sm: 25%, md: 50%, lg: 50%, xl: 50%)
+// NOTE: ex: for 4 columns, (md: 2) becomes (xs: 25%, sm: 25%, md: 50%, lg: 50%, xl: 50%)
 @function gb-sizes($sizes, $columns, $default) {
     // compute the number of columns and the current column sizes for each breakpoint
     $_columns: gb-compute-breakpoints($columns);
@@ -128,7 +123,7 @@ $grid-gutter: $unit !default;
 }
 
 // Make values persist through following breakpoints
-// NOTE ex: (md: 1) becomes (xs: 0, sm: 0, md: 1, lg: 1, xl: 1)
+// NOTE: ex: (md: 1) becomes (xs: 0, sm: 0, md: 1, lg: 1, xl: 1)
 @function gb-compute-breakpoints($map, $default: 1) {
     $output: $breakpoints;
     $value: $default;
@@ -144,25 +139,25 @@ $grid-gutter: $unit !default;
 
 
 // OPTIONS
+// NOTE: should be extended next to the row() include
+// NOTE: ex: `@extend %between-xs, %middle-md, %equal-lg;`
 // ------------------------------
 @each $key in map-keys($breakpoints) {
-    // Vertical: alignement
+    // Vertical: alignement of direct children
     $map: (bottom: flex-end, top: flex-start, middle: center, equal: stretch);
     @each $name, $property in $map {
         %#{$name}-#{$key} {
             @include breakpoint-up($key) {
-                -webkit-align-items: $property;
                 align-items: $property;
             }
         }
     }
 
-    // Horizontal: distribution
+    // Horizontal: distribution of direct children
     $map: (start: flex-end, end: flex-start, center: center, between: space-between, around: space-around);
     @each $name, $property in $map {
         %#{$name}-#{$key} {
             @include breakpoint-up($key) {
-                -webkit-justify-content: $property;
                 justify-content: $property;
             }
         }

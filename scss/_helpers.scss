@@ -2,8 +2,8 @@
 // ---------------------
 
 // Private classes
-// NOTE name them `%selector` so they won't be public classes
-// NOTE then use `@extend %selector;` to apply styles
+// NOTE: name them `%selector` so they won't be public classes
+// NOTE: then use `@extend %selector;` to apply styles
 // ---------------------
 %antialiased { -webkit-font-smoothing: antialiased; }
 %defaultaliasing { -webkit-font-smoothing: none; }

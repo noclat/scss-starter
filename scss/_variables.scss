@@ -19,11 +19,11 @@ $line-height-base: $unit*3; // 24px
 
 // FONTS
 // ------------------------------
-// fonts path, relative to the compiled css file
+// Fonts path, relative to the compiled css file
 $fonts-path: '../fonts/' !default;
 
-// fonts list
-// NOTE order: font-family, filename (without extension), font-weight, font-style
+// Fonts list
+// NOTE: order: font-family, filename (without extension), font-weight, font-style, formats
 /* EXAMPLE:
 $fonts: (
 	("customfont", "customfont-regular", normal, normal, ('eot', 'otf', 'woff', 'woff2', 'ttf', 'svg')),
@@ -53,6 +53,7 @@ $white: #FFF;
 
 
 // BREAKPOINTS
+// NOTE: could rename them or add new ones
 // ------------------------------
 $breakpoints: (
     xs: 0,
